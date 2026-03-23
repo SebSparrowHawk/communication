@@ -49,7 +49,7 @@ auto EventDataControlCompositeImpl<AtomicIndirectorType>::GetNextFreeMultiSlot()
     -> ControlSlotCompositeIndicator
 {
     EventSlotStatus::EventTimeStamp oldest_time_stamp{EventSlotStatus::TIMESTSCORE_LANGUAGE_FUTURECPP_MAX};
-    score::cpp::optional<SlotIndexType> possible_index{};
+    std::optional<SlotIndexType> possible_index{};
     EventDataControl::EventControlSlots::iterator qm_slot_ptr{nullptr};
     EventDataControl::EventControlSlots::iterator asil_b_slot_ptr{nullptr};
 

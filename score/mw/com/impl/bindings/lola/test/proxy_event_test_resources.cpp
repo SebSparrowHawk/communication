@@ -141,7 +141,7 @@ LolaProxyEventResources::~LolaProxyEventResources()
 }
 
 std::future<std::shared_ptr<ScopedEventReceiveHandler>> LolaProxyEventResources::ExpectRegisterEventNotification(
-    score::cpp::optional<pid_t> pid)
+    std::optional<pid_t> pid)
 {
     const auto pid_to_use = pid.has_value() ? pid.value() : kDummyPid;
 
@@ -166,14 +166,14 @@ std::future<std::shared_ptr<ScopedEventReceiveHandler>> LolaProxyEventResources:
     return local_handler_future;
 }
 
-void LolaProxyEventResources::ExpectReregisterEventNotification(score::cpp::optional<pid_t> pid)
+void LolaProxyEventResources::ExpectReregisterEventNotification(std::optional<pid_t> pid)
 {
     const auto pid_to_use = pid.has_value() ? pid.value() : kDummyPid;
     EXPECT_CALL(*mock_service_, ReregisterEventNotification(QualityType::kASIL_QM, element_fq_id_, pid_to_use))
         .RetiresOnSaturation();
 }
 
-void LolaProxyEventResources::ExpectUnregisterEventNotification(score::cpp::optional<pid_t> pid)
+void LolaProxyEventResources::ExpectUnregisterEventNotification(std::optional<pid_t> pid)
 {
     const auto pid_to_use = pid.has_value() ? pid.value() : kDummyPid;
     EXPECT_CALL(*mock_service_,

@@ -27,12 +27,12 @@
 #include "score/result/result.h"
 
 #include <score/callback.hpp>
-#include <score/optional.hpp>
 
 #include <array>
 #include <cstdint>
 #include <memory>
 #include <mutex>
+#include <optional>
 #include <queue>
 #include <utility>
 
@@ -115,9 +115,9 @@ class SubscriptionStateMachine : public std::enable_shared_from_this<Subscriptio
     ///
     /// Since calls to a single ProxyEvent must be called single-threaded according to our AOUs, we can take advantage
     /// of this lock-free optimisation.
-    score::cpp::optional<SlotCollector>& GetSlotCollectorLockFree() noexcept;
-    const score::cpp::optional<SlotCollector>& GetSlotCollectorLockFree() const noexcept;
-    score::cpp::optional<TransactionLogSet::TransactionLogIndex> GetTransactionLogIndex() const noexcept;
+    std::optional<SlotCollector>& GetSlotCollectorLockFree() noexcept;
+    const std::optional<SlotCollector>& GetSlotCollectorLockFree() const noexcept;
+    std::optional<TransactionLogSet::TransactionLogIndex> GetTransactionLogIndex() const noexcept;
     [[nodiscard]] const ElementFqId& GetElementFqId() const noexcept;
 
   private:
@@ -143,7 +143,7 @@ class SubscriptionStateMachine : public std::enable_shared_from_this<Subscriptio
     bool provider_service_instance_is_available_;
 
     const TransactionLogId& transaction_log_id_;
-    score::cpp::optional<TransactionLogRegistrationGuard> transaction_log_registration_guard_;
+    std::optional<TransactionLogRegistrationGuard> transaction_log_registration_guard_;
 
     // used for logging purposes
     const ElementFqId element_fq_id_;

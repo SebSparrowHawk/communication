@@ -24,13 +24,13 @@
 #include "score/result/result.h"
 
 #include <score/assert.hpp>
-#include <score/optional.hpp>
 
 #include <exception>
 #include <iostream>
 #include <limits>
 #include <memory>
 #include <mutex>
+#include <optional>
 #include <sstream>
 #include <string_view>
 #include <utility>

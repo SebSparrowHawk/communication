@@ -97,7 +97,7 @@ class StateMachineMethodsFixture : public LolaProxyEventResources
         return event_receive_handler;
     }
 
-    const score::cpp::optional<SlotCollector>& GetConstSlotCollector() const
+    const std::optional<SlotCollector>& GetConstSlotCollector() const
     {
         return state_machine_.GetSlotCollectorLockFree();
     }

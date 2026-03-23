@@ -48,8 +48,8 @@
 #include "score/memory/shared/polymorphic_offset_ptr_allocator.h"
 
 #include <score/assert.hpp>
-#include <score/optional.hpp>
 
+#include <optional>
 #include <sys/types.h>
 #include <functional>
 #include <memory>
@@ -127,7 +127,7 @@ class Skeleton final : public SkeletonBinding
     /// \brief Returns the meta-info for the given registered event.
     /// \param element_fq_id identification of the event.
     /// \return Events meta-info, if it has been registered, null else.
-    score::cpp::optional<EventMetaInfo> GetEventMetaInfo(const ElementFqId element_fq_id) const;
+    std::optional<EventMetaInfo> GetEventMetaInfo(const ElementFqId element_fq_id) const;
 
     QualityType GetInstanceQualityType() const;
 
@@ -193,7 +193,7 @@ class Skeleton final : public SkeletonBinding
         // coverity[autosar_cpp14_m11_0_1_violation]
         std::size_t control_qm_size;
         // coverity[autosar_cpp14_m11_0_1_violation]
-        score::cpp::optional<std::size_t> control_asil_b_size;
+        std::optional<std::size_t> control_asil_b_size;
     };
 
     /// \brief Calculates needed sizes for shm-objects for data and ctrl either via simulation or a rough estimation
@@ -241,9 +241,9 @@ class Skeleton final : public SkeletonBinding
     LolaServiceInstanceId::InstanceId lola_instance_id_;
     LolaServiceTypeDeployment::ServiceId lola_service_id_;
 
-    score::cpp::optional<std::string> data_storage_path_;
-    score::cpp::optional<std::string> data_control_qm_path_;
-    score::cpp::optional<std::string> data_control_asil_path_;
+    std::optional<std::string> data_storage_path_;
+    std::optional<std::string> data_control_qm_path_;
+    std::optional<std::string> data_control_asil_path_;
     ServiceDataStorage* storage_;
     ServiceDataControl* control_qm_;
     ServiceDataControl* control_asil_b_;

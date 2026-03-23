@@ -17,7 +17,7 @@
 #include "score/mw/com/impl/configuration/service_type_deployment.h"
 #include "score/mw/com/impl/instance_identifier.h"
 
-#include <score/optional.hpp>
+#include <optional>
 
 #include <cstring>
 #include <string_view>
@@ -39,7 +39,7 @@ class HandleType;
  * \return A constructed InstanceIdentifier
  */
 HandleType make_HandleType(InstanceIdentifier identifier,
-                           score::cpp::optional<ServiceInstanceId> instance_id = {}) noexcept;
+                           std::optional<ServiceInstanceId> instance_id = {}) noexcept;
 
 /**
  * \brief It types the handle for a specific service
@@ -108,13 +108,13 @@ class HandleType
     InstanceIdentifier identifier_;
     ServiceInstanceId instance_id_;
 
-    explicit HandleType(InstanceIdentifier, score::cpp::optional<ServiceInstanceId> instance_id) noexcept;
+    explicit HandleType(InstanceIdentifier, std::optional<ServiceInstanceId> instance_id) noexcept;
 
     // Suppress "AUTOSAR C++14 A11-3-1", The rule states: "Friend declarations shall not be used".
     // Design decision: Friend class required to access private constructor.
     // This way more implementation details can be hidden from the user.
     // coverity[autosar_cpp14_a11_3_1_violation]
-    friend HandleType make_HandleType(InstanceIdentifier, score::cpp::optional<ServiceInstanceId> instance_id) noexcept;
+    friend HandleType make_HandleType(InstanceIdentifier, std::optional<ServiceInstanceId> instance_id) noexcept;
 };
 
 }  // namespace score::mw::com::impl

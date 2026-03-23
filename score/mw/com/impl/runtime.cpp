@@ -79,7 +79,7 @@ namespace score::mw::com::impl
 using TracingFilterConfig = tracing::TracingFilterConfig;
 
 IRuntime* Runtime::mock_ = nullptr;
-score::cpp::optional<Configuration> Runtime::initialization_config_{};
+std::optional<Configuration> Runtime::initialization_config_{};
 bool Runtime::runtime_initialization_locked_{false};
 
 std::mutex score::mw::com::impl::Runtime::mutex_{};
@@ -87,7 +87,7 @@ std::mutex score::mw::com::impl::Runtime::mutex_{};
 namespace
 {
 
-score::cpp::optional<TracingFilterConfig> ParseTraceConfig(const Configuration& configuration)
+std::optional<TracingFilterConfig> ParseTraceConfig(const Configuration& configuration)
 {
     if (!configuration.GetTracingConfiguration().IsTracingEnabled())
     {
@@ -148,7 +148,7 @@ Runtime& Runtime::getInstanceInternal() noexcept
     // Suppress "AUTOSAR C++14 A3-3-2" rule finding. This rule states: "Static and thread-local objects shall be
     // constant-initialized.". This cannot be constexpr as the lambda function executes at runtime.
     // coverity[autosar_cpp14_a3_3_2_violation]
-    static Runtime instance{([]() -> std::pair<Configuration, score::cpp::optional<TracingFilterConfig>> {
+    static Runtime instance{([]() -> std::pair<Configuration, std::optional<TracingFilterConfig>> {
         std::lock_guard<std::mutex> lock{mutex_};
         runtime_initialization_locked_ = true;
         if (!initialization_config_.has_value())
@@ -170,7 +170,7 @@ Runtime& Runtime::getInstanceInternal() noexcept
     return instance;
 }
 
-Runtime::Runtime(std::pair<Configuration&&, score::cpp::optional<TracingFilterConfig>&&> configs)
+Runtime::Runtime(std::pair<Configuration&&, std::optional<TracingFilterConfig>&&> configs)
     : IRuntime{},
       configuration_{std::move(std::get<0>(configs))},
       tracing_filter_configuration_{std::move(std::get<1>(configs))},

@@ -23,7 +23,7 @@
 #include "score/mw/com/test/common_test_resources/big_datatype.h"
 #include "score/os/utils/interprocess/interprocess_notification.h"
 
-#include <score/optional.hpp>
+#include <optional>
 
 #include <stdint.h>
 #include <array>
@@ -43,7 +43,7 @@ class ProxyTestAttorney
   public:
     explicit ProxyTestAttorney(Proxy& proxy) : proxy_{proxy} {}
 
-    score::cpp::optional<uintptr_t> GetEventMetaInfoAddress(const ElementFqId element_fq_id) const noexcept
+    std::optional<uintptr_t> GetEventMetaInfoAddress(const ElementFqId element_fq_id) const noexcept
     {
         auto* const service_data_storage = static_cast<ServiceDataStorage*>(proxy_.data_->getUsableBaseAddress());
         if (service_data_storage == nullptr)
@@ -68,7 +68,7 @@ class SkeletonAttorney
   public:
     explicit SkeletonAttorney(Skeleton& skeleton) : skeleton_{skeleton} {}
 
-    score::cpp::optional<uintptr_t> GetEventMetaInfoAddress(const ElementFqId element_fq_id) const noexcept
+    std::optional<uintptr_t> GetEventMetaInfoAddress(const ElementFqId element_fq_id) const noexcept
     {
         auto search = skeleton_.storage_->events_metainfo_.find(element_fq_id);
         if (search == skeleton_.storage_->events_metainfo_.cend())

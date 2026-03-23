@@ -68,7 +68,7 @@ ConfigurationStore kConfigStoreFindAny{kInstanceSpecifierString,
                                        make_ServiceIdentifierType("foo"),
                                        QualityType::kASIL_QM,
                                        kServiceId,
-                                       score::cpp::optional<LolaServiceInstanceId>{}};
+                                       std::optional<LolaServiceInstanceId>{}};
 
 using ServiceDiscoveryClientStopFindServiceFixture = ServiceDiscoveryClientFixture;
 TEST_F(ServiceDiscoveryClientStopFindServiceFixture, RemovesWatchOnStopFindService)

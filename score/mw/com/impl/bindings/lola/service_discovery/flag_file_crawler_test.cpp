@@ -89,7 +89,7 @@ const ConfigurationStore kConfigStoreQmAny{
     kServiceIdentifier,
     QualityType::kASIL_QM,
     kServiceId,
-    score::cpp::optional<LolaServiceInstanceId>{},
+    std::optional<LolaServiceInstanceId>{},
 };
 
 const ConfigurationStore kConfigStoreAsilBAny{
@@ -97,7 +97,7 @@ const ConfigurationStore kConfigStoreAsilBAny{
     kServiceIdentifier,
     QualityType::kASIL_B,
     kServiceId,
-    score::cpp::optional<LolaServiceInstanceId>{},
+    std::optional<LolaServiceInstanceId>{},
 };
 
 const ConfigurationStore kConfigStoreInvalidQualityAny{
@@ -105,7 +105,7 @@ const ConfigurationStore kConfigStoreInvalidQualityAny{
     kServiceIdentifier,
     QualityType::kInvalid,
     kServiceId,
-    score::cpp::optional<LolaServiceInstanceId>{},
+    std::optional<LolaServiceInstanceId>{},
 };
 
 EnrichedInstanceIdentifier kEnrichedInstanceIdentifier1Invalid{kConfigStoreQm1.GetEnrichedInstanceIdentifier(),

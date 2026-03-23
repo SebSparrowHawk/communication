@@ -91,7 +91,7 @@ std::optional<std::uint16_t> SubscribedState::GetMaxSampleCount() const noexcept
     return state_machine_.subscription_data_.max_sample_count_.value();
 }
 
-score::cpp::optional<SlotCollector>& SubscribedState::GetSlotCollector() noexcept
+std::optional<SlotCollector>& SubscribedState::GetSlotCollector() noexcept
 {
     SCORE_LANGUAGE_FUTURECPP_ASSERT_MESSAGE(
         state_machine_.subscription_data_.max_sample_count_.has_value(),
@@ -99,7 +99,7 @@ score::cpp::optional<SlotCollector>& SubscribedState::GetSlotCollector() noexcep
     return state_machine_.subscription_data_.slot_collector_;
 }
 
-const score::cpp::optional<SlotCollector>& SubscribedState::GetSlotCollector() const noexcept
+const std::optional<SlotCollector>& SubscribedState::GetSlotCollector() const noexcept
 {
     SCORE_LANGUAGE_FUTURECPP_ASSERT_MESSAGE(
         state_machine_.subscription_data_.max_sample_count_.has_value(),
@@ -107,7 +107,7 @@ const score::cpp::optional<SlotCollector>& SubscribedState::GetSlotCollector() c
     return state_machine_.subscription_data_.slot_collector_;
 }
 
-score::cpp::optional<TransactionLogSet::TransactionLogIndex> SubscribedState::GetTransactionLogIndex() const noexcept
+std::optional<TransactionLogSet::TransactionLogIndex> SubscribedState::GetTransactionLogIndex() const noexcept
 {
     SCORE_LANGUAGE_FUTURECPP_ASSERT_MESSAGE(state_machine_.transaction_log_registration_guard_.has_value(),
                                             "TransactionLogRegistrationGuard should be initialised on subscription.");

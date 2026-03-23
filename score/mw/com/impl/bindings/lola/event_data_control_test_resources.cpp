@@ -24,7 +24,7 @@ EventDataControlCompositeAttorney::EventDataControlCompositeAttorney(
 }
 
 void EventDataControlCompositeAttorney::PrepareAllocateNextSlot(
-    const std::pair<score::cpp::optional<SlotIndexType>, bool> expected_result) noexcept
+    const std::pair<std::optional<SlotIndexType>, bool> expected_result) noexcept
 {
     event_data_control_composite_.ignore_qm_control_ = expected_result.second;
     const auto slot_index =
@@ -61,14 +61,14 @@ void EventDataControlCompositeAttorney::SetQmControlDisconnected(const bool expe
     event_data_control_composite_.ignore_qm_control_ = expected_result;
 }
 
-std::pair<EventSlotStatus, score::cpp::optional<EventSlotStatus>> EventDataControlCompositeAttorney::GetSlotStatus(
+std::pair<EventSlotStatus, std::optional<EventSlotStatus>> EventDataControlCompositeAttorney::GetSlotStatus(
     const SlotIndexType slot_index) const noexcept
 {
     return {EventSlotStatus(event_data_control_composite_.asil_qm_control_->state_slots_[slot_index]),
             event_data_control_composite_.asil_b_control_ != nullptr
-                ? score::cpp::optional<EventSlotStatus>(
+                ? std::optional<EventSlotStatus>(
                       event_data_control_composite_.asil_b_control_->state_slots_[slot_index])
-                : score::cpp::optional<EventSlotStatus>{}};
+                : std::optional<EventSlotStatus>{}};
 }
 
 EventDataControlAttorney::EventDataControlAttorney(EventDataControl& event_data_control) noexcept
@@ -77,7 +77,7 @@ EventDataControlAttorney::EventDataControlAttorney(EventDataControl& event_data_
 }
 
 void EventDataControlAttorney::PrepareAllocateNextSlot(
-    const score::cpp::optional<SlotIndexType> expected_result) noexcept
+    const std::optional<SlotIndexType> expected_result) noexcept
 {
     const auto slot_index =
         expected_result.has_value() ? expected_result.value() : std::numeric_limits<SlotIndexType>::max();
@@ -102,7 +102,7 @@ void EventDataControlAttorney::PrepareAllocateNextSlot(
     }
 }
 
-void EventDataControlAttorney::PrepareReferenceNextEvent(const score::cpp::optional<SlotIndexType> expected_result,
+void EventDataControlAttorney::PrepareReferenceNextEvent(const std::optional<SlotIndexType> expected_result,
                                                          const EventSlotStatus::EventTimeStamp last_search_time,
                                                          const EventSlotStatus::EventTimeStamp upper_limit) noexcept
 {

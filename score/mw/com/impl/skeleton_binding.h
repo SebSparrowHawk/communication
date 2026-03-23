@@ -19,10 +19,10 @@
 #include "score/result/result.h"
 
 #include <score/callback.hpp>
-#include <score/optional.hpp>
 
 #include <functional>
 #include <map>
+#include <optional>
 #include <string_view>
 
 namespace score::mw::com::impl

@@ -17,7 +17,7 @@
 #include "score/mw/com/impl/runtime.h"
 #include "score/mw/com/types.h"
 
-#include <score/optional.hpp>
+#include <optional>
 #include <fstream>
 #include <iostream>
 #include <memory>

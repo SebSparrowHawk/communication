@@ -26,10 +26,10 @@
 #include "score/result/result.h"
 
 #include <score/assert.hpp>
-#include <score/optional.hpp>
 #include <score/utility.hpp>
 
 #include <mutex>
+#include <optional>
 #include <string_view>
 
 namespace score::mw::com::impl::lola
@@ -91,7 +91,7 @@ class ProxyEventCommon final
         return event_control_;
     };
     std::optional<std::uint16_t> GetMaxSampleCount() const noexcept;
-    score::cpp::optional<TransactionLogSet::TransactionLogIndex> GetTransactionLogIndex() const noexcept;
+    std::optional<TransactionLogSet::TransactionLogIndex> GetTransactionLogIndex() const noexcept;
     void NotifyServiceInstanceChangedAvailability(const bool is_available, const pid_t new_event_source_pid) noexcept;
 
   private:
@@ -104,7 +104,7 @@ class ProxyEventCommon final
     {
         score::cpp::ignore = test_slot_collector_.emplace(std::move(slot_collector));
     };
-    score::cpp::optional<SlotCollector> test_slot_collector_;
+    std::optional<SlotCollector> test_slot_collector_;
 
     Proxy& parent_;
     ElementFqId event_fq_id_;

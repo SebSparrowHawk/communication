@@ -40,7 +40,6 @@
 #include "score/os/unistd.h"
 #include "score/os/utils/inotify/inotify_instance_impl.h"
 
-#include <score/optional.hpp>
 #include <score/stop_token.hpp>
 
 #include <gmock/gmock.h>
@@ -48,6 +47,7 @@
 #include <chrono>
 #include <cstdint>
 #include <memory>
+#include <optional>
 #include <string>
 #include <thread>
 #include <utility>

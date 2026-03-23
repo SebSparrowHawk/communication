@@ -19,7 +19,6 @@
 #include "score/mw/com/test/partial_restart/consumer_restart/consumer.h"
 #include "score/mw/com/test/partial_restart/consumer_restart/provider.h"
 
-#include <score/optional.hpp>
 #include <score/stop_token.hpp>
 
 #include <boost/program_options.hpp>
@@ -27,6 +26,7 @@
 #include <cstdio>
 #include <cstdlib>
 #include <iostream>
+#include <optional>
 #include <string>
 #include <string_view>
 
@@ -48,13 +48,13 @@ const std::chrono::seconds kMaxWaitTimeToReachCheckpoint{30U};
 ///          ITF variant 6: Consumer kill/crash restart -> kill_consumer{true}
 struct TestParameters
 {
-    score::cpp::optional<std::string> service_instance_manifest{};
+    std::optional<std::string> service_instance_manifest{};
     std::size_t number_test_iterations{};
     /// \brief shall the consumer be killed (true) or gracefully shutdown (false) before restart.
     bool kill_consumer{false};
 };
 
-score::cpp::optional<TestParameters> ParseTestParameters(int argc, const char** argv) noexcept
+std::optional<TestParameters> ParseTestParameters(int argc, const char** argv) noexcept
 {
     namespace po = boost::program_options;
 

@@ -23,7 +23,7 @@
 
 #include "score/filesystem/filesystem.h"
 
-#include <score/optional.hpp>
+#include <optional>
 
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>

@@ -15,7 +15,6 @@
 
 #include "score/json/json_parser.h"
 
-#include <score/optional.hpp>
 
 #include <cstdint>
 #include <optional>

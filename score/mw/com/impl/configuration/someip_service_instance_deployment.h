@@ -19,7 +19,7 @@
 
 #include "score/json/json_parser.h"
 
-#include <score/optional.hpp>
+#include <optional>
 
 #include <cstdint>
 #include <string>
@@ -36,7 +36,7 @@ class SomeIpServiceInstanceDeployment
     using FieldInstanceMapping = std::unordered_map<std::string, SomeIpFieldInstanceDeployment>;
 
     explicit SomeIpServiceInstanceDeployment(const score::json::Object& json_object) noexcept;
-    explicit SomeIpServiceInstanceDeployment(score::cpp::optional<SomeIpServiceInstanceId> instance_id = {},
+    explicit SomeIpServiceInstanceDeployment(std::optional<SomeIpServiceInstanceId> instance_id = {},
                                              EventInstanceMapping events = {},
                                              FieldInstanceMapping fields = {})
         : instance_id_{instance_id}, events_{std::move(events)}, fields_{std::move(fields)}
@@ -49,7 +49,7 @@ class SomeIpServiceInstanceDeployment
     // The struct is used as a config storage obtained by performing the parsing json object.
     // Public access is required by the implementation to reach the following members of the struct.
     // coverity[autosar_cpp14_m11_0_1_violation]
-    score::cpp::optional<SomeIpServiceInstanceId> instance_id_;
+    std::optional<SomeIpServiceInstanceId> instance_id_;
     // coverity[autosar_cpp14_m11_0_1_violation]
     EventInstanceMapping events_;  // key = event name
     // coverity[autosar_cpp14_m11_0_1_violation]

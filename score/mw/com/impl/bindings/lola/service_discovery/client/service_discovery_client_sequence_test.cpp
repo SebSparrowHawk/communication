@@ -54,7 +54,7 @@ ConfigurationStore kConfigStoreFindAny{kInstanceSpecifierString,
                                        make_ServiceIdentifierType("foo"),
                                        QualityType::kASIL_QM,
                                        kServiceId,
-                                       score::cpp::optional<LolaServiceInstanceId>{}};
+                                       std::optional<LolaServiceInstanceId>{}};
 
 HandleType kHandleQm1{kConfigStoreQm1.GetHandle()};
 HandleType kHandleQm2{kConfigStoreQm2.GetHandle()};

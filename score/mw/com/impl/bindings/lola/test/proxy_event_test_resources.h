@@ -38,7 +38,7 @@
 #include "score/os/mocklib/fcntl_mock.h"
 #include "score/os/mocklib/unistdmock.h"
 
-#include <score/optional.hpp>
+#include <optional>
 
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
@@ -224,9 +224,9 @@ class LolaProxyEventResources : public ProxyMockedMemoryFixture
     ~LolaProxyEventResources() override;
 
     std::future<std::shared_ptr<ScopedEventReceiveHandler>> ExpectRegisterEventNotification(
-        score::cpp::optional<pid_t> pid = {});
-    void ExpectReregisterEventNotification(score::cpp::optional<pid_t> pid = {});
-    void ExpectUnregisterEventNotification(score::cpp::optional<pid_t> pid = {});
+        std::optional<pid_t> pid = {});
+    void ExpectReregisterEventNotification(std::optional<pid_t> pid = {});
+    void ExpectUnregisterEventNotification(std::optional<pid_t> pid = {});
 
     SlotIndexType PutData(const std::uint32_t value = 42, const EventSlotStatus::EventTimeStamp timestamp = 1);
 

@@ -113,17 +113,17 @@ std::optional<std::uint16_t> SubscriptionStateMachine::GetMaxSampleCount() const
     return GetCurrentEventState().GetMaxSampleCount();
 }
 
-score::cpp::optional<SlotCollector>& SubscriptionStateMachine::GetSlotCollectorLockFree() noexcept
+std::optional<SlotCollector>& SubscriptionStateMachine::GetSlotCollectorLockFree() noexcept
 {
     return GetCurrentEventState().GetSlotCollector();
 }
 
-const score::cpp::optional<SlotCollector>& SubscriptionStateMachine::GetSlotCollectorLockFree() const noexcept
+const std::optional<SlotCollector>& SubscriptionStateMachine::GetSlotCollectorLockFree() const noexcept
 {
     return GetCurrentEventState().GetSlotCollector();
 }
 
-score::cpp::optional<TransactionLogSet::TransactionLogIndex> SubscriptionStateMachine::GetTransactionLogIndex()
+std::optional<TransactionLogSet::TransactionLogIndex> SubscriptionStateMachine::GetTransactionLogIndex()
     const noexcept
 {
     std::lock_guard<std::mutex> lock{state_mutex_};

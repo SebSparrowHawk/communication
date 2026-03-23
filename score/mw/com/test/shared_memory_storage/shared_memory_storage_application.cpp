@@ -49,7 +49,7 @@ const std::string kProxyDoneInterprocessNotifierShmPath{"/proxy_done_interproces
 const std::string kSkeletonDoneInterprocessNotifierShmPath{"/skeleton_done_interprocess_notifier_creator"};
 
 template <typename ServiceElementViewType, typename LolaServiceElementType, typename ServiceElementType>
-score::cpp::optional<score::mw::com::impl::lola::ElementFqId> GetElementFqId(ServiceElementType& service_element)
+std::optional<score::mw::com::impl::lola::ElementFqId> GetElementFqId(ServiceElementType& service_element)
 {
     auto* const map_api_lanes_stamped_binding =
         score::mw::com::test::GetLolaBinding<ServiceElementViewType, LolaServiceElementType>(service_element);
@@ -61,7 +61,7 @@ score::cpp::optional<score::mw::com::impl::lola::ElementFqId> GetElementFqId(Ser
 }
 
 template <typename ServiceType, typename ServiceViewType, typename LolaServiceType, typename LolaServiceAttorneyType>
-score::cpp::optional<std::array<uintptr_t, 2>> GetTypeMetaInfoAddresses(
+std::optional<std::array<uintptr_t, 2>> GetTypeMetaInfoAddresses(
     ServiceType& service,
     const std::array<score::mw::com::impl::lola::ElementFqId, 2>& element_fq_ids)
 {
