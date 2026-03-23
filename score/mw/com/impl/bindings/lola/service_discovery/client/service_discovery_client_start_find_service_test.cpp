@@ -80,9 +80,9 @@ ConfigurationStore kConfigStoreFindAny{kInstanceSpecifierString,
                                        kServiceId,
                                        std::optional<LolaServiceInstanceId>{}};
 
-HandleType kHandleFindAnyQm1{kConfigStoreFindAny.GetHandle(kConfigStoreQm1.lola_instance_id_.value())};
-HandleType kHandleFindAnyQm2{kConfigStoreFindAny.GetHandle(kConfigStoreQm2.lola_instance_id_.value())};
-HandleType kHandleFindAnyAsilB{kConfigStoreFindAny.GetHandle(kConfigStoreAsilB.lola_instance_id_.value())};
+HandleType kHandleFindAnyQm1{kConfigStoreFindAny.GetHandle(ServiceInstanceId{LolaServiceInstanceId{kConfigStoreQm1.lola_instance_id_.value()}})};
+HandleType kHandleFindAnyQm2{kConfigStoreFindAny.GetHandle(ServiceInstanceId{LolaServiceInstanceId{kConfigStoreQm2.lola_instance_id_.value()}})};
+HandleType kHandleFindAnyAsilB{kConfigStoreFindAny.GetHandle(ServiceInstanceId{LolaServiceInstanceId{kConfigStoreAsilB.lola_instance_id_.value()}})};
 
 using ServiceDiscoveryClientStartFindServiceFixture = ServiceDiscoveryClientFixture;
 TEST_F(ServiceDiscoveryClientStartFindServiceFixture, CallingStartFindServiceReturnsValidResult)

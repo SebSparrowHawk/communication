@@ -1096,10 +1096,17 @@ auto ParseReceiverQueueSize(const score::json::Object& global_config_map, const 
         const auto& asil_queue_size = queue_size_map.find(queue_type_str.data());
         if (asil_queue_size != queue_size_map.cend())
         {
-            return score::ResultToAmpOptionalOrElse(asil_queue_size->second.As<std::int32_t>(), [](const auto&) {
+            if (!asil_queue_size->second.As<std::int32_t>().has_value())
+            {
                 score::mw::log::LogFatal("lola") << "Invalid value for ReceiverQueueSize";
                 SCORE_LANGUAGE_FUTURECPP_ASSERT_PRD(false);
-            });
+            } else {
+                return asil_queue_size->second.As<std::int32_t>().value();
+            }
+//            return score::ResultToAmpOptionalOrElse(asil_queue_size->second.As<std::int32_t>(), [](const auto&) {
+//                score::mw::log::LogFatal("lola") << "Invalid value for ReceiverQueueSize";
+//                SCORE_LANGUAGE_FUTURECPP_ASSERT_PRD(false);
+//            });
         }
         else
         {
@@ -1124,10 +1131,17 @@ auto ParseSenderQueueSize(const score::json::Object& global_config_map) -> std::
         const auto& asil_tx_queue_size = queue_size_map.find("B-sender");
         if (asil_tx_queue_size != queue_size_map.cend())
         {
-            return score::ResultToAmpOptionalOrElse(asil_tx_queue_size->second.As<std::int32_t>(), [](const auto&) {
+            if (!asil_tx_queue_size->second.As<std::int32_t>().has_value())
+            {
                 score::mw::log::LogFatal("lola") << "Invalid value for SenderQueueSize";
                 SCORE_LANGUAGE_FUTURECPP_ASSERT_PRD(false);
-            });
+            } else {
+                return asil_tx_queue_size->second.As<std::int32_t>().value();
+            }
+//            return score::ResultToAmpOptionalOrElse(asil_tx_queue_size->second.As<std::int32_t>(), [](const auto&) {
+//                score::mw::log::LogFatal("lola") << "Invalid value for SenderQueueSize";
+//                SCORE_LANGUAGE_FUTURECPP_ASSERT_PRD(false);
+//            });
         }
         else
         {

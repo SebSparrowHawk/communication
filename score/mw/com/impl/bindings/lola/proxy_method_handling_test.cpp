@@ -99,7 +99,7 @@ LolaServiceId kLolaServiceId{2U};
 LolaServiceInstanceId::InstanceId kLolaInstanceId{3U};
 
 const LolaServiceInstanceDeployment kLolaServiceInstanceDeploymentWithMethods{
-    kLolaInstanceId,
+    LolaServiceInstanceId{kLolaInstanceId},
     {},
     {},
     {{kDummyMethodName0, LolaMethodInstanceDeployment{kDummyQueueSize0}},
@@ -893,7 +893,7 @@ TEST_F(ProxyMethodHandlingFixture, EnablingMethodThatDoesNotContainQueueSizeInCo
     // empty queue size
     const std::optional<LolaMethodInstanceDeployment::QueueSize> empty_queue_size{};
     const LolaServiceInstanceDeployment lola_service_instance_deployment_missing_queue_size{
-        kLolaInstanceId, {}, {}, {{kDummyMethodName0, LolaMethodInstanceDeployment{empty_queue_size}}}};
+            LolaServiceInstanceId{kLolaInstanceId}, {}, {}, {{kDummyMethodName0, LolaMethodInstanceDeployment{empty_queue_size}}}};
     const LolaServiceTypeDeployment lola_service_type_deployment{
         kLolaServiceId, {}, {}, {{kDummyMethodName0, kDummyMethodId0}}};
 
