@@ -33,6 +33,8 @@
 #include "score/mw/log/logging.h"
 #include "score/mw/log/recorder_mock.h"
 
+#include <score/optional.hpp>
+
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
@@ -1374,7 +1376,7 @@ class TracingRuntimeDebounceFixture : public TracingRuntimeTraceFixture
             .WillByDefault(Return(kServiceInstanceElement));
 
         ON_CALL(log_recorder_mock_, StartRecord(testing::_, testing::_))
-            .WillByDefault(Return(std::optional<score::mw::log::SlotHandle>{score::mw::log::SlotHandle{}}));
+            .WillByDefault(Return(score::cpp::optional<score::mw::log::SlotHandle>{score::mw::log::SlotHandle{}}));
 
         ON_CALL(binding_tracing_runtime_mock_, SetDataLossFlag(testing::_)).WillByDefault(Return());
     }
