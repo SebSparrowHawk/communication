@@ -14,7 +14,7 @@
 
 #include "score/json/json_parser.h"
 
-#include <score/optional.hpp>
+#include <optional>
 
 #include <gtest/gtest.h>
 

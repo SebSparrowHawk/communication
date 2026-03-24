@@ -41,7 +41,7 @@ InstanceIdentifier MakeFakeInstanceIdentifier(const std::uint16_t unique_identif
     auto& type_deployment = service_type_deployments_.emplace_back(score::cpp::blank{});
     auto& instance_deployment =
         service_instance_deployments_.emplace_back(std::move(service_identifier_type),
-                                                   LolaServiceInstanceDeployment{unique_identifier},
+                                                   LolaServiceInstanceDeployment{LolaServiceInstanceId{unique_identifier}},
                                                    QualityType::kASIL_B,
                                                    std::move(instance_specifier));
 

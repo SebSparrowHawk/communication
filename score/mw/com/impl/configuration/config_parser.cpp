@@ -185,7 +185,7 @@ auto ParseServiceTypeIdentifier(const score::json::Object& json) -> ServiceIdent
     return make_ServiceIdentifierType(name.data(), version.first, version.second);
 }
 
-auto ParseAsilLevel(const score::json::Object& json_map) -> score::cpp::optional<QualityType>
+auto ParseAsilLevel(const score::json::Object& json_map) -> std::optional<QualityType>
 {
     const auto& quality = json_map.find(kAsilKey.data());
     if (quality != json_map.cend())
@@ -208,10 +208,10 @@ auto ParseAsilLevel(const score::json::Object& json_map) -> score::cpp::optional
         return QualityType::kInvalid;
     }
 
-    return score::cpp::nullopt;
+    return std::nullopt;
 }
 
-auto ParseShmSizeCalcMode(const score::json::Object& json_map) -> score::cpp::optional<ShmSizeCalculationMode>
+auto ParseShmSizeCalcMode(const score::json::Object& json_map) -> std::optional<ShmSizeCalculationMode>
 {
     const auto& shm_size_calc_mode = json_map.find(kShmSizeCalcModeKey.data());
     if (shm_size_calc_mode != json_map.cend())
@@ -233,7 +233,7 @@ auto ParseShmSizeCalcMode(const score::json::Object& json_map) -> score::cpp::op
         }
     }
 
-    return score::cpp::nullopt;
+    return std::nullopt;
 }
 
 // Note 1:
@@ -1068,7 +1068,7 @@ auto ParseServiceTypes(const score::json::Object& json_map) -> Configuration::Se
 }
 
 auto ParseReceiverQueueSize(const score::json::Object& global_config_map, const QualityType quality_type)
-    -> score::cpp::optional<std::int32_t>
+    -> std::optional<std::int32_t>
 {
     const auto& queue_size = global_config_map.find(kQueueSizeKey.data());
     if (queue_size != global_config_map.cend())
@@ -1096,23 +1096,30 @@ auto ParseReceiverQueueSize(const score::json::Object& global_config_map, const 
         const auto& asil_queue_size = queue_size_map.find(queue_type_str.data());
         if (asil_queue_size != queue_size_map.cend())
         {
-            return score::ResultToAmpOptionalOrElse(asil_queue_size->second.As<std::int32_t>(), [](const auto&) {
+            if (!asil_queue_size->second.As<std::int32_t>().has_value())
+            {
                 score::mw::log::LogFatal("lola") << "Invalid value for ReceiverQueueSize";
                 SCORE_LANGUAGE_FUTURECPP_ASSERT_PRD(false);
-            });
+            } else {
+                return asil_queue_size->second.As<std::int32_t>().value();
+            }
+//            return score::ResultToAmpOptionalOrElse(asil_queue_size->second.As<std::int32_t>(), [](const auto&) {
+//                score::mw::log::LogFatal("lola") << "Invalid value for ReceiverQueueSize";
+//                SCORE_LANGUAGE_FUTURECPP_ASSERT_PRD(false);
+//            });
         }
         else
         {
-            return score::cpp::nullopt;
+            return std::nullopt;
         }
     }
     else
     {
-        return score::cpp::nullopt;
+        return std::nullopt;
     }
 }
 
-auto ParseSenderQueueSize(const score::json::Object& global_config_map) -> score::cpp::optional<std::int32_t>
+auto ParseSenderQueueSize(const score::json::Object& global_config_map) -> std::optional<std::int32_t>
 {
     const auto& queue_size = global_config_map.find(kQueueSizeKey.data());
     if (queue_size != global_config_map.cend())
@@ -1124,19 +1131,26 @@ auto ParseSenderQueueSize(const score::json::Object& global_config_map) -> score
         const auto& asil_tx_queue_size = queue_size_map.find("B-sender");
         if (asil_tx_queue_size != queue_size_map.cend())
         {
-            return score::ResultToAmpOptionalOrElse(asil_tx_queue_size->second.As<std::int32_t>(), [](const auto&) {
+            if (!asil_tx_queue_size->second.As<std::int32_t>().has_value())
+            {
                 score::mw::log::LogFatal("lola") << "Invalid value for SenderQueueSize";
                 SCORE_LANGUAGE_FUTURECPP_ASSERT_PRD(false);
-            });
+            } else {
+                return asil_tx_queue_size->second.As<std::int32_t>().value();
+            }
+//            return score::ResultToAmpOptionalOrElse(asil_tx_queue_size->second.As<std::int32_t>(), [](const auto&) {
+//                score::mw::log::LogFatal("lola") << "Invalid value for SenderQueueSize";
+//                SCORE_LANGUAGE_FUTURECPP_ASSERT_PRD(false);
+//            });
         }
         else
         {
-            return score::cpp::nullopt;
+            return std::nullopt;
         }
     }
     else
     {
-        return score::cpp::nullopt;
+        return std::nullopt;
     }
 }
 
@@ -1181,27 +1195,27 @@ auto ParseGlobalProperties(const score::json::Object& top_level_object) -> Globa
             }
         }
 
-        const score::cpp::optional<std::int32_t> qm_rx_message_size{
+        const std::optional<std::int32_t> qm_rx_message_size{
             ParseReceiverQueueSize(process_properties_map, QualityType::kASIL_QM)};
         if (qm_rx_message_size.has_value())
         {
             global_configuration.SetReceiverMessageQueueSize(QualityType::kASIL_QM, qm_rx_message_size.value());
         }
 
-        const score::cpp::optional<std::int32_t> b_rx_message_size{
+        const std::optional<std::int32_t> b_rx_message_size{
             ParseReceiverQueueSize(process_properties_map, QualityType::kASIL_B)};
         if (b_rx_message_size.has_value())
         {
             global_configuration.SetReceiverMessageQueueSize(QualityType::kASIL_B, b_rx_message_size.value());
         }
 
-        const score::cpp::optional<std::int32_t> b_tx_message_size{ParseSenderQueueSize(process_properties_map)};
+        const std::optional<std::int32_t> b_tx_message_size{ParseSenderQueueSize(process_properties_map)};
         if (b_tx_message_size.has_value())
         {
             global_configuration.SetSenderMessageQueueSize(b_tx_message_size.value());
         }
 
-        const score::cpp::optional<ShmSizeCalculationMode> shm_size_calc_mode{
+        const std::optional<ShmSizeCalculationMode> shm_size_calc_mode{
             ParseShmSizeCalcMode(process_properties_map)};
         if (shm_size_calc_mode.has_value())
         {

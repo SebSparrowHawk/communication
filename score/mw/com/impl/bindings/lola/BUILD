@@ -30,7 +30,6 @@ cc_library(
         ":skeleton",
         "//score/mw/com/impl/configuration",
         "@score_baselibs//score/concurrency",
-        "@score_baselibs//score/language/futurecpp",
         "@score_logging//score/mw/log",
     ],
 )
@@ -99,7 +98,6 @@ cc_library(
     deps = [
         ":proxy_instance_identifier",
         "//score/mw/com/impl/configuration",
-        "@score_baselibs//score/language/futurecpp",
     ],
 )
 
@@ -114,7 +112,6 @@ cc_library(
     ],
     deps = [
         "//score/mw/com/impl/configuration",
-        "@score_baselibs//score/language/futurecpp",
     ],
 )
 

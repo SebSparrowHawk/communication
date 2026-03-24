@@ -26,7 +26,7 @@
 #include "score/memory/shared/offset_ptr.h"
 #include "score/memory/shared/shared_memory_factory.h"
 
-#include <score/optional.hpp>
+#include <optional>
 
 #include <memory>
 #include <string>

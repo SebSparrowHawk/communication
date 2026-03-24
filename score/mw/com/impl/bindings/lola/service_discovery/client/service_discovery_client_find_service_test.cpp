@@ -56,10 +56,10 @@ ConfigurationStore kConfigStoreFindAny{kInstanceSpecifierString,
                                        make_ServiceIdentifierType("foo"),
                                        QualityType::kASIL_QM,
                                        kServiceId,
-                                       score::cpp::optional<LolaServiceInstanceId>{}};
+                                       std::optional<LolaServiceInstanceId>{}};
 
-HandleType kHandleFindAnyQm1{kConfigStoreFindAny.GetHandle(kConfigStoreQm1.lola_instance_id_.value())};
-HandleType kHandleFindAnyQm2{kConfigStoreFindAny.GetHandle(kConfigStoreQm2.lola_instance_id_.value())};
+HandleType kHandleFindAnyQm1{kConfigStoreFindAny.GetHandle(ServiceInstanceId{LolaServiceInstanceId{kConfigStoreQm1.lola_instance_id_.value()}})};
+HandleType kHandleFindAnyQm2{kConfigStoreFindAny.GetHandle(ServiceInstanceId{LolaServiceInstanceId{kConfigStoreQm2.lola_instance_id_.value()}})};
 
 using ServiceDiscoveryClientFindServiceFixture = ServiceDiscoveryClientFixture;
 TEST_F(ServiceDiscoveryClientFindServiceFixture, AddsNoWatchOnFindService)
@@ -110,9 +110,11 @@ TEST_F(ServiceDiscoveryClientFindServiceFixture, FindServiceReturnHandlesForAny)
     // whose handles contain InstanceIdentifiers without an InstanceId and explitily set InstanceIds in the handles
     // themselves
     const auto expected_handle_0 =
-        make_HandleType(kConfigStoreFindAny.GetInstanceIdentifier(), kConfigStoreQm1.lola_instance_id_.value());
+        make_HandleType(kConfigStoreFindAny.GetInstanceIdentifier(),
+                        ServiceInstanceId{LolaServiceInstanceId{kConfigStoreQm1.lola_instance_id_.value()}});
     const auto expected_handle_1 =
-        make_HandleType(kConfigStoreFindAny.GetInstanceIdentifier(), kConfigStoreQm2.lola_instance_id_.value());
+        make_HandleType(kConfigStoreFindAny.GetInstanceIdentifier(),
+                        ServiceInstanceId{LolaServiceInstanceId{kConfigStoreQm2.lola_instance_id_.value()}});
     EXPECT_THAT(service_handle_container, Contains(expected_handle_0));
     EXPECT_THAT(service_handle_container, Contains(expected_handle_1));
 }

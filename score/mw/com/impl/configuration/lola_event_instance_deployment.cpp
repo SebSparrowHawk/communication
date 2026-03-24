@@ -16,7 +16,7 @@
 
 #include "score/mw/log/logging.h"
 
-#include <score/optional.hpp>
+#include <optional>
 #include <exception>
 
 namespace score::mw::com::impl

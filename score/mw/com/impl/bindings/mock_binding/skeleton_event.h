@@ -40,12 +40,12 @@ class SkeletonEvent : public SkeletonEventBinding<SampleType>
     MOCK_METHOD(ResultBlank,
                 Send,
                 (const SampleType& value,
-                 score::cpp::optional<typename SkeletonEventBinding<SampleType>::SendTraceCallback>),
+                 std::optional<typename SkeletonEventBinding<SampleType>::SendTraceCallback>),
                 (noexcept, override));
     MOCK_METHOD(ResultBlank,
                 Send,
                 (SampleAllocateePtr<SampleType> sample,
-                 score::cpp::optional<typename SkeletonEventBinding<SampleType>::SendTraceCallback>),
+                 std::optional<typename SkeletonEventBinding<SampleType>::SendTraceCallback>),
                 (noexcept, override));
     MOCK_METHOD(Result<SampleAllocateePtr<SampleType>>, Allocate, (), (noexcept, override));
     MOCK_METHOD(ResultBlank, PrepareOffer, (), (noexcept, override));
@@ -69,13 +69,13 @@ class SkeletonEventFacade : public SkeletonEventBinding<SampleType>
     ~SkeletonEventFacade() override = default;
     ResultBlank Send(
         const SampleType& value,
-        score::cpp::optional<typename SkeletonEventBinding<SampleType>::SendTraceCallback> callback) noexcept override
+        std::optional<typename SkeletonEventBinding<SampleType>::SendTraceCallback> callback) noexcept override
     {
         return skeleton_event_.Send(value, std::move(callback));
     };
     ResultBlank Send(
         SampleAllocateePtr<SampleType> sample,
-        score::cpp::optional<typename SkeletonEventBinding<SampleType>::SendTraceCallback> callback) noexcept override
+        std::optional<typename SkeletonEventBinding<SampleType>::SendTraceCallback> callback) noexcept override
     {
         return skeleton_event_.Send(std::move(sample), std::move(callback));
     }

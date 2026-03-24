@@ -49,7 +49,7 @@
 #include "score/os/mocklib/stat_mock.h"
 #include "score/os/mocklib/unistdmock.h"
 
-#include <score/optional.hpp>
+#include <optional>
 
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
@@ -74,9 +74,9 @@ LolaServiceInstanceDeployment CreateLolaServiceInstanceDeployment(
     std::vector<std::pair<std::string, LolaMethodInstanceDeployment>> lola_method_inst_depls,
     std::vector<uid_t> allowed_consumers_qm,
     std::vector<uid_t> allowed_consumers_asil_b,
-    score::cpp::optional<std::size_t> size = score::cpp::nullopt,
-    score::cpp::optional<std::size_t> control_asil_b_shm_size = score::cpp::nullopt,
-    score::cpp::optional<std::size_t> control_qm_shm_size = score::cpp::nullopt);
+    std::optional<std::size_t> size = std::nullopt,
+    std::optional<std::size_t> control_asil_b_shm_size = std::nullopt,
+    std::optional<std::size_t> control_qm_shm_size = std::nullopt);
 
 /// \brief Creates a ServiceTypeDeployment, which is effectively a LolaServiceTypeDeployment as we currently do not
 ///        support any other.
@@ -341,7 +341,7 @@ static const ServiceTypeDeployment kValidTypeDeploymentWithMethods{
 
 static const ServiceTypeDeployment kValidMinimalTypeDeploymentWithBlankBinding{score::cpp::blank{}};
 
-static const score::cpp::optional<std::size_t> kSimulatedShmSize{};
+static const std::optional<std::size_t> kSimulatedShmSize{};
 
 const auto kControlChannelPathQm{"/lola-ctl-0000000000000001-00016"};
 const auto kControlChannelPathAsilB{"/lola-ctl-0000000000000001-00016-b"};

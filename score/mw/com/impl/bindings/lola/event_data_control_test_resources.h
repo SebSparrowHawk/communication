@@ -16,7 +16,7 @@
 #include "score/mw/com/impl/bindings/lola/event_data_control.h"
 #include "score/mw/com/impl/bindings/lola/event_data_control_composite.h"
 
-#include <score/optional.hpp>
+#include <optional>
 
 namespace score::mw::com::impl::lola
 {
@@ -29,7 +29,7 @@ class EventDataControlCompositeAttorney
     /// \brief Prepares the underlying EventDataControlComposite (its contained EventDataControls) in a way, that the
     ///        next call to AllocateNextSlot() will return the given expected_result
     /// \param expected_result to be expected result for AllocateNextSlot()
-    void PrepareAllocateNextSlot(const std::pair<score::cpp::optional<SlotIndexType>, bool> expected_result) noexcept;
+    void PrepareAllocateNextSlot(const std::pair<std::optional<SlotIndexType>, bool> expected_result) noexcept;
     /// \brief Prepares the underlying EventDataControlComposite in way, that it returns the expected_result in the next
     ///        call to IsQmControlDisconnected()
     /// \param expected_result to be expected result for IsQmControlDisconnected()
@@ -38,7 +38,7 @@ class EventDataControlCompositeAttorney
     /// \param slot_index index for which the EventSlotStatus shall be returned
     /// \return a pair, where first contains the EventSlotStatus of qm control and second (optionally) the
     /// EventSlotStatus of the asil_b control.
-    std::pair<EventSlotStatus, score::cpp::optional<EventSlotStatus>> GetSlotStatus(
+    std::pair<EventSlotStatus, std::optional<EventSlotStatus>> GetSlotStatus(
         const SlotIndexType slot_index) const noexcept;
 
   private:
@@ -53,7 +53,7 @@ class EventDataControlAttorney
     /// \brief Prepares the underlying EventDataControl in a way, that the
     ///        next call to AllocateNextSlot() will return the given expected_result
     /// \param expected_result to be expected result for AllocateNextSlot()
-    void PrepareAllocateNextSlot(const score::cpp::optional<SlotIndexType> expected_result) noexcept;
+    void PrepareAllocateNextSlot(const std::optional<SlotIndexType> expected_result) noexcept;
 
     /// \brief Prepares the underlying EventDataControl in a way, that the next call to ReferenceNextEvent() will return
     ///        the given expected_result.
@@ -64,7 +64,7 @@ class EventDataControlAttorney
     /// \param expected_result to be expected result for ReferenceNextEvent()
     /// \param last_search_time see ReferenceNextEvent()
     /// \param upper_limit see ReferenceNextEvent()
-    void PrepareReferenceNextEvent(const score::cpp::optional<SlotIndexType> expected_result,
+    void PrepareReferenceNextEvent(const std::optional<SlotIndexType> expected_result,
                                    const EventSlotStatus::EventTimeStamp last_search_time,
                                    const EventSlotStatus::EventTimeStamp upper_limit =
                                        EventSlotStatus::TIMESTSCORE_LANGUAGE_FUTURECPP_MAX) noexcept;

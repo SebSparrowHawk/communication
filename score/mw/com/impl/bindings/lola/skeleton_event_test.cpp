@@ -338,7 +338,7 @@ TEST_F(SkeletonEventTimestampFixture, SendUpdatesTimestampInControlData)
     auto* first_lola_ptr = first_view.template As<lola::SampleAllocateePtr<test::TestSampleType>>();
     auto first_slot_indicator = first_lola_ptr->GetReferencedSlot();
 
-    auto first_send_result = skeleton_event_->Send(std::move(first_allocated_slot), score::cpp::nullopt);
+    auto first_send_result = skeleton_event_->Send(std::move(first_allocated_slot), std::nullopt);
     ASSERT_TRUE(first_send_result.has_value());
 
     // THEN its timestamp should be a valid, non-zero value
@@ -355,7 +355,7 @@ TEST_F(SkeletonEventTimestampFixture, SendUpdatesTimestampInControlData)
     const impl::SampleAllocateePtrView<test::TestSampleType> second_view{second_allocated_slot};
     auto* second_lola_ptr = second_view.template As<lola::SampleAllocateePtr<test::TestSampleType>>();
     auto second_slot_indicator = second_lola_ptr->GetReferencedSlot();
-    auto second_send_result = skeleton_event_->Send(std::move(second_allocated_slot), score::cpp::nullopt);
+    auto second_send_result = skeleton_event_->Send(std::move(second_allocated_slot), std::nullopt);
     ASSERT_TRUE(second_send_result.has_value());
 
     // THEN its timestamp should be exactly one greater than the first one

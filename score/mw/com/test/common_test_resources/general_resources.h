@@ -21,11 +21,11 @@
 #include "score/os/errno.h"
 
 #include <score/assert.hpp>
-#include <score/optional.hpp>
 #include <score/stop_token.hpp>
 
 #include <chrono>
 #include <functional>
+#include <optional>
 #include <string_view>
 #include <vector>
 
@@ -81,7 +81,7 @@ os::Result<SharedMemoryObjectCreator<CheckPointControl>> OpenSharedCheckPointCon
     std::string_view message_prefix,
     std::string_view shared_memory_file_path) noexcept;
 
-score::cpp::optional<ChildProcessGuard> ForkProcessAndRunInChildProcess(std::string_view parent_message_prefix,
+std::optional<ChildProcessGuard> ForkProcessAndRunInChildProcess(std::string_view parent_message_prefix,
                                                                         std::string_view child_message_prefix,
                                                                         std::function<void()> child_callable) noexcept;
 

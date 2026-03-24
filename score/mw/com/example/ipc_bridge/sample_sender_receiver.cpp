@@ -20,11 +20,11 @@
 #include "score/mw/com/impl/proxy_event.h"
 #include <score/assert.hpp>
 #include <score/hash.hpp>
-#include <score/optional.hpp>
 
 #include <cstring>
 #include <fstream>
 #include <iostream>
+#include <optional>
 #include <sstream>
 #include <string>
 #include <thread>
@@ -145,18 +145,18 @@ class SampleReceiver
     }
 
     const score::mw::com::InstanceSpecifier& instance_specifier_;
-    score::cpp::optional<std::uint32_t> last_received_;
+    std::optional<std::uint32_t> last_received_;
     std::size_t received_;
     bool check_sample_hash_;
 };
 
-score::cpp::optional<std::reference_wrapper<impl::ProxyEvent<MapApiLanesStamped>>> GetMapApiLanesStampedProxyEvent(
+std::optional<std::reference_wrapper<impl::ProxyEvent<MapApiLanesStamped>>> GetMapApiLanesStampedProxyEvent(
     IpcBridgeProxy& proxy)
 {
     return proxy.map_api_lanes_stamped_;
 }
 
-score::cpp::optional<std::reference_wrapper<impl::GenericProxyEvent>> GetMapApiLanesStampedProxyEvent(
+std::optional<std::reference_wrapper<impl::GenericProxyEvent>> GetMapApiLanesStampedProxyEvent(
     GenericProxy& generic_proxy)
 {
     const std::string event_name{"map_api_lanes_stamped"};
@@ -273,7 +273,7 @@ Result<SampleAllocateePtr<MapApiLanesStamped>> PrepareMapLaneSample(IpcBridgeSke
 
 template <typename ProxyType, typename ProxyEventType>
 int EventSenderReceiver::RunAsProxy(const score::mw::com::InstanceSpecifier& instance_specifier,
-                                    const score::cpp::optional<std::chrono::milliseconds> cycle_time,
+                                    const std::optional<std::chrono::milliseconds> cycle_time,
                                     const std::size_t num_cycles,
                                     bool try_writing_to_data_segment,
                                     bool check_sample_hash)
@@ -331,7 +331,7 @@ int EventSenderReceiver::RunAsProxy(const score::mw::com::InstanceSpecifier& ins
         return EXIT_FAILURE;
     }
 
-    score::cpp::optional<char> last_received{};
+    std::optional<char> last_received{};
     SampleReceiver receiver{instance_specifier, check_sample_hash};
     for (std::size_t cycle = 0U; cycle < num_cycles;)
     {
@@ -466,13 +466,13 @@ int EventSenderReceiver::RunAsSkeleton(const score::mw::com::InstanceSpecifier& 
 
 template int EventSenderReceiver::RunAsProxy<IpcBridgeProxy, impl::ProxyEvent<MapApiLanesStamped>>(
     const score::mw::com::InstanceSpecifier&,
-    const score::cpp::optional<std::chrono::milliseconds>,
+    const std::optional<std::chrono::milliseconds>,
     const std::size_t,
     bool,
     bool);
 template int EventSenderReceiver::RunAsProxy<impl::GenericProxy, impl::GenericProxyEvent>(
     const score::mw::com::InstanceSpecifier&,
-    const score::cpp::optional<std::chrono::milliseconds>,
+    const std::optional<std::chrono::milliseconds>,
     const std::size_t,
     bool,
     bool);

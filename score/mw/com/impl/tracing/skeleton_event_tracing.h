@@ -26,7 +26,7 @@
 #include "score/mw/com/impl/tracing/configuration/service_element_instance_identifier_view.h"
 #include "score/mw/com/impl/tracing/skeleton_event_tracing_data.h"
 
-#include <score/optional.hpp>
+#include <optional>
 
 #include <cstdint>
 #include <string_view>
@@ -249,9 +249,9 @@ void TraceSendWithAllocate(SkeletonEventTracingData& skeleton_event_tracing_data
 template <typename SampleType>
 auto CreateTracingSendCallback(SkeletonEventTracingData& skeleton_event_tracing_data,
                                const SkeletonEventBindingBase& skeleton_event_binding_base) noexcept
-    -> score::cpp::optional<typename SkeletonEventBinding<SampleType>::SendTraceCallback>
+    -> std::optional<typename SkeletonEventBinding<SampleType>::SendTraceCallback>
 {
-    score::cpp::optional<typename SkeletonEventBinding<SampleType>::SendTraceCallback> tracing_handler{};
+    std::optional<typename SkeletonEventBinding<SampleType>::SendTraceCallback> tracing_handler{};
     if (skeleton_event_tracing_data.enable_send)
     {
         tracing_handler = [&skeleton_event_tracing_data, &skeleton_event_binding_base](
@@ -265,9 +265,9 @@ auto CreateTracingSendCallback(SkeletonEventTracingData& skeleton_event_tracing_
 template <typename SampleType>
 auto CreateTracingSendWithAllocateCallback(SkeletonEventTracingData& skeleton_event_tracing_data,
                                            const SkeletonEventBindingBase& skeleton_event_binding_base) noexcept
-    -> score::cpp::optional<typename SkeletonEventBinding<SampleType>::SendTraceCallback>
+    -> std::optional<typename SkeletonEventBinding<SampleType>::SendTraceCallback>
 {
-    score::cpp::optional<typename SkeletonEventBinding<SampleType>::SendTraceCallback> tracing_handler{};
+    std::optional<typename SkeletonEventBinding<SampleType>::SendTraceCallback> tracing_handler{};
     if (skeleton_event_tracing_data.enable_send_with_allocate)
     {
         tracing_handler = [&skeleton_event_tracing_data, &skeleton_event_binding_base](

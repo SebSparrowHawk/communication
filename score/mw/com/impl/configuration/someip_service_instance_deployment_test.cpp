@@ -88,7 +88,7 @@ TEST_F(SomeIpServiceInstanceDeploymentFixture, CanCreateFromSerializedObjectWith
 
 TEST(SomeIpServiceInstanceDeploymentDeathTest, CreatingFromSerializedObjectWithMismatchedSerializationVersionTerminates)
 {
-    const SomeIpServiceInstanceDeployment unit{42U};
+    const SomeIpServiceInstanceDeployment unit{SomeIpServiceInstanceId{42U}};
 
     const auto serialization_version_key = "serializationVersion";
     const std::uint32_t invalid_serialization_version = SomeIpServiceInstanceDeployment::serializationVersion + 1;
@@ -104,8 +104,8 @@ TEST(SomeIpServiceInstanceDeploymentDeathTest, CreatingFromSerializedObjectWithM
 TEST(LolaServiceInstanceDeploymentLessThan, DeploymentsComparedBasedOnInstanceId)
 {
     // Given 2 SomeIpServiceInstanceDeployments containing different values
-    const SomeIpServiceInstanceDeployment lhs{1U};
-    const SomeIpServiceInstanceDeployment rhs{2U};
+    const SomeIpServiceInstanceDeployment lhs{SomeIpServiceInstanceId{1U}};
+    const SomeIpServiceInstanceDeployment rhs{SomeIpServiceInstanceId{2U}};
 
     // When comparing the two
     // Then the result is based on the instance IDs

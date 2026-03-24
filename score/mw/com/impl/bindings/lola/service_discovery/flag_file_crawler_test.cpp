@@ -89,7 +89,7 @@ const ConfigurationStore kConfigStoreQmAny{
     kServiceIdentifier,
     QualityType::kASIL_QM,
     kServiceId,
-    score::cpp::optional<LolaServiceInstanceId>{},
+    std::optional<LolaServiceInstanceId>{},
 };
 
 const ConfigurationStore kConfigStoreAsilBAny{
@@ -97,7 +97,7 @@ const ConfigurationStore kConfigStoreAsilBAny{
     kServiceIdentifier,
     QualityType::kASIL_B,
     kServiceId,
-    score::cpp::optional<LolaServiceInstanceId>{},
+    std::optional<LolaServiceInstanceId>{},
 };
 
 const ConfigurationStore kConfigStoreInvalidQualityAny{
@@ -105,7 +105,7 @@ const ConfigurationStore kConfigStoreInvalidQualityAny{
     kServiceIdentifier,
     QualityType::kInvalid,
     kServiceId,
-    score::cpp::optional<LolaServiceInstanceId>{},
+    std::optional<LolaServiceInstanceId>{},
 };
 
 EnrichedInstanceIdentifier kEnrichedInstanceIdentifier1Invalid{kConfigStoreQm1.GetEnrichedInstanceIdentifier(),
@@ -297,16 +297,16 @@ TEST_F(FlagFileCrawlerCrawlAnyInstanceFixture,
     const auto asil_qm_handles =
         existing_instances_result.value().asil_qm.GetKnownHandles(searched_instance.GetEnrichedInstanceIdentifier());
     ASSERT_EQ(asil_qm_handles.size(), 2U);
-    EXPECT_THAT(asil_qm_handles, Contains(searched_instance.GetHandle(kInstanceId1)));
-    EXPECT_THAT(asil_qm_handles, Contains(searched_instance.GetHandle(kInstanceId2)));
+    EXPECT_THAT(asil_qm_handles, Contains(searched_instance.GetHandle(ServiceInstanceId{kInstanceId1})));
+    EXPECT_THAT(asil_qm_handles, Contains(searched_instance.GetHandle(ServiceInstanceId{kInstanceId2})));
 
     // and the instances container will contain all the handles for instances corresponding to the searched service
     // with quality type ASIL-B
     const auto asil_b_handles =
         existing_instances_result.value().asil_qm.GetKnownHandles(searched_instance.GetEnrichedInstanceIdentifier());
     ASSERT_EQ(asil_b_handles.size(), 2U);
-    EXPECT_THAT(asil_b_handles, Contains(searched_instance.GetHandle(kInstanceId1)));
-    EXPECT_THAT(asil_b_handles, Contains(searched_instance.GetHandle(kInstanceId2)));
+    EXPECT_THAT(asil_b_handles, Contains(searched_instance.GetHandle(ServiceInstanceId{kInstanceId1})));
+    EXPECT_THAT(asil_b_handles, Contains(searched_instance.GetHandle(ServiceInstanceId{kInstanceId2})));
 }
 
 TEST_F(FlagFileCrawlerCrawlAnyInstanceFixture,
@@ -330,16 +330,16 @@ TEST_F(FlagFileCrawlerCrawlAnyInstanceFixture,
     const auto asil_qm_handles =
         existing_instances_result.value().asil_qm.GetKnownHandles(searched_instance.GetEnrichedInstanceIdentifier());
     ASSERT_EQ(asil_qm_handles.size(), 2U);
-    EXPECT_THAT(asil_qm_handles, Contains(searched_instance.GetHandle(kInstanceId1)));
-    EXPECT_THAT(asil_qm_handles, Contains(searched_instance.GetHandle(kInstanceId2)));
+    EXPECT_THAT(asil_qm_handles, Contains(searched_instance.GetHandle(ServiceInstanceId{LolaServiceInstanceId{kInstanceId1}})));
+    EXPECT_THAT(asil_qm_handles, Contains(searched_instance.GetHandle(ServiceInstanceId{LolaServiceInstanceId{kInstanceId2}})));
 
     // and the instances container will contain all the handles for instances corresponding to the searched service
     // with quality type ASIL-B
     const auto asil_b_handles =
         existing_instances_result.value().asil_qm.GetKnownHandles(searched_instance.GetEnrichedInstanceIdentifier());
     ASSERT_EQ(asil_b_handles.size(), 2U);
-    EXPECT_THAT(asil_b_handles, Contains(searched_instance.GetHandle(kInstanceId1)));
-    EXPECT_THAT(asil_b_handles, Contains(searched_instance.GetHandle(kInstanceId2)));
+    EXPECT_THAT(asil_b_handles, Contains(searched_instance.GetHandle(ServiceInstanceId{LolaServiceInstanceId{kInstanceId1}})));
+    EXPECT_THAT(asil_b_handles, Contains(searched_instance.GetHandle(ServiceInstanceId{LolaServiceInstanceId{kInstanceId2}})));
 }
 
 TEST_F(FlagFileCrawlerCrawlAnyInstanceFixture, IgnoresInvalidInstanceDirectories)
@@ -365,7 +365,7 @@ TEST_F(FlagFileCrawlerCrawlAnyInstanceFixture, IgnoresInvalidInstanceDirectories
     const auto asil_qm_handles =
         existing_instances_result.value().asil_qm.GetKnownHandles(searched_instance.GetEnrichedInstanceIdentifier());
     ASSERT_EQ(asil_qm_handles.size(), 1U);
-    EXPECT_THAT(asil_qm_handles, Contains(searched_instance.GetHandle(kInstanceId1)));
+    EXPECT_THAT(asil_qm_handles, Contains(searched_instance.GetHandle(ServiceInstanceId{LolaServiceInstanceId{kInstanceId1}})));
 }
 
 TEST_F(FlagFileCrawlerCrawlAnyInstanceFixture, ReturnsErrorWhenGettingDirectoryStatusReturnsError)
@@ -565,7 +565,7 @@ TEST_F(FlagFileCrawlerCrawlAndWatchAnyInstanceFixture, IgnoresDirectoriesInInsta
     EXPECT_TRUE(instances.asil_b.Empty());
     const auto asil_qm_handles = instances.asil_qm.GetKnownHandles(
         kConfigStoreQmAny.GetEnrichedInstanceIdentifier(ServiceInstanceId{kInstanceId1}));
-    EXPECT_THAT(asil_qm_handles, Contains(kConfigStoreQmAny.GetHandle(kInstanceId1)));
+    EXPECT_THAT(asil_qm_handles, Contains(kConfigStoreQmAny.GetHandle(ServiceInstanceId{LolaServiceInstanceId{kInstanceId1}})));
 }
 
 TEST_F(FlagFileCrawlerCrawlAndWatchSpecificInstanceFixture, IgnoresFilesOnInstanceIdDirectoryLevel)

@@ -229,7 +229,6 @@ cc_library(
         ":skeleton_event_binding",
         "//score/mw/com/impl/tracing:skeleton_event_tracing",
         "//score/mw/com/impl/tracing:skeleton_event_tracing_data",
-        "@score_baselibs//score/language/futurecpp",
         "@score_baselibs//score/result",
     ],
 )
@@ -246,7 +245,6 @@ cc_library(
     deps = [
         ":error",
         ":skeleton_event_base",
-        "@score_baselibs//score/language/futurecpp",
         "@score_baselibs//score/result",
         "@score_logging//score/mw/log",
     ],
@@ -434,7 +432,6 @@ cc_library(
     ],
     deps = [
         "proxy_event_binding",
-        "@score_baselibs//score/language/futurecpp",
     ],
 )
 
@@ -901,7 +898,6 @@ cc_gtest_unit_test(
     srcs = ["sample_reference_tracker_test.cpp"],
     deps = [
         ":sample_reference_tracker",
-        "@score_baselibs//score/language/futurecpp",
     ],
 )
 

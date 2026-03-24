@@ -20,6 +20,7 @@
 #include "score/mw/com/impl/tracing/trace_error.h"
 
 #include <score/assert.hpp>
+#include <score/optional.hpp>
 #include <score/overload.hpp>
 
 #include <utility>
@@ -172,14 +173,19 @@ analysis::tracing::TracePointType InternalToExternalTracePointType(
 analysis::tracing::AraComMetaInfo CreateMetaInfo(
     const ServiceElementInstanceIdentifierView& service_element_instance_identifier,
     const TracingRuntime::TracePointType& trace_point_type,
-    const score::cpp::optional<TracingRuntime::TracePointDataId> trace_point_data_id,
+    const std::optional<TracingRuntime::TracePointDataId> trace_point_data_id,
     const IBindingTracingRuntime& binding_runtime) noexcept
 {
     const analysis::tracing::TracePointType ext_trace_point_type = InternalToExternalTracePointType(trace_point_type);
+
+    // TODO The following convertion can be removed once base lib analysis tracing has been migrated to use std::optional
+    const auto score_opt_trace_point_data_id = trace_point_data_id.has_value()
+            ? score::cpp::make_optional(trace_point_data_id.value()) : score::cpp::nullopt;
+
     analysis::tracing::AraComMetaInfo result{analysis::tracing::AraComProperties(
         ext_trace_point_type,
         binding_runtime.ConvertToTracingServiceInstanceElement(service_element_instance_identifier),
-        trace_point_data_id)};
+        score_opt_trace_point_data_id)};
     if (binding_runtime.GetDataLossFlag())
     {
         result.SetDataLossBit();
@@ -602,7 +608,7 @@ ResultBlank TracingRuntime::Trace(const BindingType binding_type,
 ResultBlank TracingRuntime::Trace(const BindingType binding_type,
                                   const ServiceElementInstanceIdentifierView service_element_instance_identifier,
                                   const TracePointType trace_point_type,
-                                  const score::cpp::optional<TracePointDataId> trace_point_data_id,
+                                  const std::optional<TracePointDataId> trace_point_data_id,
                                   const void* const local_data_ptr,
                                   const std::size_t local_data_size) noexcept
 {

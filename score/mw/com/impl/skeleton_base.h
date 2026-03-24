@@ -26,13 +26,13 @@
 #include "score/mw/log/logging.h"
 
 #include <score/assert.hpp>
-#include <score/optional.hpp>
 #include <score/span.hpp>
 
 #include <cstdint>
 #include <functional>
 #include <map>
 #include <memory>
+#include <optional>
 #include <string_view>
 
 namespace score::mw::com::impl
@@ -217,7 +217,7 @@ class SkeletonBaseView
     SkeletonBase& skeleton_base_;
 };
 
-score::cpp::optional<InstanceIdentifier> GetInstanceIdentifier(const InstanceSpecifier& specifier);
+std::optional<InstanceIdentifier> GetInstanceIdentifier(const InstanceSpecifier& specifier);
 
 }  // namespace score::mw::com::impl
 

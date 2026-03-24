@@ -76,7 +76,7 @@ SomeIpServiceInstanceDeployment::SomeIpServiceInstanceDeployment(const score::js
     const auto instance_id_it = json_object.find(kInstanceIdKeySerInstDepl);
     if (instance_id_it != json_object.end())
     {
-        instance_id_ = instance_id_it->second.As<json::Object>().value();
+        instance_id_ = static_cast<SomeIpServiceInstanceId>(instance_id_it->second.As<json::Object>().value());
     }
 
     const auto serialization_version =

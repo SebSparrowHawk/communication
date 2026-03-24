@@ -71,7 +71,7 @@ ConfigurationStore kConfigStoreFindAny{kInstanceSpecifierString,
                                        make_ServiceIdentifierType("foo"),
                                        QualityType::kASIL_QM,
                                        kServiceId,
-                                       score::cpp::optional<LolaServiceInstanceId>{}};
+                                       std::optional<LolaServiceInstanceId>{}};
 
 score::cpp::static_vector<os::InotifyEvent, os::InotifyInstance::max_events> CreateEventVectorWithEventMasks(
     const std::vector<uint32_t>& event_masks,

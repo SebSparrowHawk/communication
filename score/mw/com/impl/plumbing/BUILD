@@ -28,7 +28,6 @@ cc_library(
         ":sample_allocatee_ptr",
         ":sample_ptr",
         ":skeleton_binding_factory",
-        "@score_baselibs//score/language/futurecpp",
     ],
 )
 
@@ -60,7 +59,6 @@ cc_library(
     deps = [
         "//score/mw/com/impl:instance_identifier",
         "//score/mw/com/impl:skeleton_base",
-        "@score_baselibs//score/language/futurecpp",
     ],
 )
 
@@ -142,7 +140,6 @@ cc_library(
         "//score/mw/com/impl:handle_type",
         "//score/mw/com/impl:instance_identifier",
         "//score/mw/com/impl:proxy_binding",
-        "@score_baselibs//score/language/futurecpp",
     ],
 )
 
@@ -158,7 +155,6 @@ cc_library(
     deps = [
         "//score/mw/com/impl:instance_identifier",
         "//score/mw/com/impl:proxy_base",
-        "@score_baselibs//score/language/futurecpp",
     ],
 )
 
@@ -174,7 +170,6 @@ cc_library(
     deps = [
         "//score/mw/com/impl:instance_identifier",
         "//score/mw/com/impl:proxy_base",
-        "@score_baselibs//score/language/futurecpp",
     ],
 )
 
@@ -191,7 +186,6 @@ cc_library(
         "//score/mw/com/impl:instance_identifier",
         "//score/mw/com/impl:proxy_base",
         "//score/mw/com/impl/methods:proxy_method_binding",
-        "@score_baselibs//score/language/futurecpp",
     ],
 )
 
@@ -223,7 +217,6 @@ cc_library(
     deps = [
         "//score/mw/com/impl:instance_identifier",
         "//score/mw/com/impl:skeleton_base",
-        "@score_baselibs//score/language/futurecpp",
     ],
 )
 
@@ -239,7 +232,6 @@ cc_library(
     deps = [
         "//score/mw/com/impl:instance_identifier",
         "//score/mw/com/impl:skeleton_base",
-        "@score_baselibs//score/language/futurecpp",
     ],
 )
 
@@ -380,7 +372,6 @@ cc_library(
     deps = [
         ":i_skeleton_field_binding_factory",
         ":skeleton_service_element_binding_factory_impl",
-        "@score_baselibs//score/language/futurecpp",
     ],
 )
 
@@ -395,7 +386,6 @@ cc_library(
     tags = ["FFI"],
     deps = [
         ":i_proxy_binding_factory",
-        "@score_baselibs//score/language/futurecpp",
     ],
 )
 
@@ -478,7 +468,6 @@ cc_library(
     deps = [
         "skeleton_field_binding_factory_impl",
         ":i_skeleton_field_binding_factory",
-        "@score_baselibs//score/language/futurecpp",
     ],
 )
 
@@ -630,7 +619,6 @@ cc_library(
         "//score/mw/com/impl:instance_identifier",
         "//score/mw/com/impl:proxy_base",
         "//score/mw/com/impl:skeleton_base",
-        "@score_baselibs//score/language/futurecpp",
     ],
 )
 
@@ -652,7 +640,6 @@ cc_library(
         "//score/mw/com/impl:instance_identifier",
         "//score/mw/com/impl:proxy_base",
         "//score/mw/com/impl:skeleton_base",
-        "@score_baselibs//score/language/futurecpp",
     ],
 )
 

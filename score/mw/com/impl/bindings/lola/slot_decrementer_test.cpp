@@ -17,7 +17,7 @@
 #include "score/mw/com/impl/bindings/lola/test_doubles/fake_memory_resource.h"
 #include "score/mw/com/impl/bindings/lola/transaction_log_id.h"
 
-#include <score/optional.hpp>
+#include <optional>
 
 #include <gtest/gtest.h>
 #include <cstddef>
@@ -71,7 +71,7 @@ class SlotDecrementerFixture : public ::testing::Test
         event_data_control_.GetTransactionLogSet().RegisterProxyElement(kDummyTransactionLogId).value()};
 
     ControlSlotIndicator control_slot_indicator_{};
-    score::cpp::optional<SlotDecrementer> slot_decrementer_{};
+    std::optional<SlotDecrementer> slot_decrementer_{};
 };
 
 TEST_F(SlotDecrementerFixture, CreatingSlotDecrementerWithReferencedSlotMaintainsReferenceCount)

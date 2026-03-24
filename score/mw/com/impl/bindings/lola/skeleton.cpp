@@ -748,7 +748,7 @@ bool Skeleton::OpenSharedMemoryForControl(const QualityType asil_level)
 
 void Skeleton::RemoveSharedMemory()
 {
-    constexpr auto RemoveMemoryIfExists = [](const score::cpp::optional<std::string>& path) -> void {
+    constexpr auto RemoveMemoryIfExists = [](const std::optional<std::string>& path) -> void {
         if (path.has_value())
         {
             score::memory::shared::SharedMemoryFactory::Remove(path.value());
@@ -830,8 +830,8 @@ Skeleton::ShmResourceStorageSizes Skeleton::CalculateShmResourceStorageSizesBySi
 
     const auto control_asil_b_size =
         detail_skeleton::HasAsilBSupport(identifier_)
-            ? score::cpp::optional<std::size_t>{control_asil_resource_->GetUserAllocatedBytes()}
-            : score::cpp::optional<std::size_t>{};
+            ? std::optional<std::size_t>{control_asil_resource_->GetUserAllocatedBytes()}
+            : std::optional<std::size_t>{};
 
     return ShmResourceStorageSizes{control_data_size, control_qm_size, control_asil_b_size};
 }
@@ -924,12 +924,12 @@ Skeleton::ShmResourceStorageSizes Skeleton::CalculateShmResourceStorageSizes(Ske
 // key value is not comparable and in our case the key is comparable. so no way for 'event_controls_.find()' to throw
 // an exception.
 // coverity[autosar_cpp14_a15_5_3_violation : FALSE]
-score::cpp::optional<EventMetaInfo> Skeleton::GetEventMetaInfo(const ElementFqId element_fq_id) const
+std::optional<EventMetaInfo> Skeleton::GetEventMetaInfo(const ElementFqId element_fq_id) const
 {
     auto search = storage_->events_metainfo_.find(element_fq_id);
     if (search == storage_->events_metainfo_.cend())
     {
-        return score::cpp::nullopt;
+        return std::nullopt;
     }
     else
     {

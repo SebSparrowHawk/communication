@@ -32,7 +32,6 @@
 #include "score/mw/log/logging.h"
 
 #include <score/assert.hpp>
-#include <score/optional.hpp>
 #include <score/utility.hpp>
 
 #include <atomic>
@@ -84,10 +83,10 @@ class SkeletonEvent final : public SkeletonEventBinding<SampleType>
     /// \brief Sends a value by _copy_ towards a consumer. It will allocate the necessary space and then copy the value
     /// into Shared Memory.
     ResultBlank Send(const SampleType& value,
-                     score::cpp::optional<SendTraceCallback> send_trace_callback) noexcept override;
+                     std::optional<SendTraceCallback> send_trace_callback) noexcept override;
 
     ResultBlank Send(impl::SampleAllocateePtr<SampleType> sample,
-                     score::cpp::optional<SendTraceCallback> send_trace_callback) noexcept override;
+                     std::optional<SendTraceCallback> send_trace_callback) noexcept override;
 
     Result<impl::SampleAllocateePtr<SampleType>> Allocate() noexcept override;
 
@@ -168,7 +167,7 @@ template <typename SampleType>
 // std::bad_optional_access which leds to std::terminate().
 // coverity[autosar_cpp14_a15_5_3_violation : FALSE]
 ResultBlank SkeletonEvent<SampleType>::Send(const SampleType& value,
-                                            score::cpp::optional<SendTraceCallback> send_trace_callback) noexcept
+                                            std::optional<SendTraceCallback> send_trace_callback) noexcept
 {
     auto allocated_slot_result = Allocate();
     if (!(allocated_slot_result.has_value()))
@@ -183,7 +182,7 @@ ResultBlank SkeletonEvent<SampleType>::Send(const SampleType& value,
 
 template <typename SampleType>
 ResultBlank SkeletonEvent<SampleType>::Send(impl::SampleAllocateePtr<SampleType> sample,
-                                            score::cpp::optional<SendTraceCallback> send_trace_callback) noexcept
+                                            std::optional<SendTraceCallback> send_trace_callback) noexcept
 {
     const impl::SampleAllocateePtrView<SampleType> view{sample};
     auto ptr = view.template As<lola::SampleAllocateePtr<SampleType>>();
