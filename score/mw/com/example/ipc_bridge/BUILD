@@ -61,7 +61,6 @@ cc_library(
     features = COMPILER_WARNING_FEATURES,
     deps = [
         "//score/mw/com",
-        "@score_baselibs//score/language/futurecpp",
     ],
 )
 

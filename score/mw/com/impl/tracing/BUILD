@@ -121,7 +121,6 @@ cc_library(
         "//score/mw/com/impl:skeleton_event_base",
         "//score/mw/com/impl:skeleton_field_base",
         "//score/mw/com/impl/tracing/configuration:service_element_instance_identifier_view",
-        "@score_baselibs//score/language/futurecpp",
     ],
 )
 
@@ -197,7 +196,6 @@ cc_library(
         "//score/mw/com/impl/tracing/configuration:service_element_instance_identifier_view",
         "//score/mw/com/impl/tracing/configuration:skeleton_event_trace_point_type",
         "//score/mw/com/impl/tracing/configuration:skeleton_field_trace_point_type",
-        "@score_baselibs//score/language/futurecpp",
         "@score_baselibs//score/memory/shared:i_shared_memory_resource",
     ],
 )
@@ -287,7 +285,6 @@ cc_gtest_unit_test(
     features = COMPILER_WARNING_FEATURES,
     deps = [
         ":type_erased_sample_ptr",
-        "@score_baselibs//score/language/futurecpp",
     ],
 )
 

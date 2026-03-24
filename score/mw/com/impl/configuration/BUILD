@@ -288,7 +288,6 @@ cc_library(
         ":configuration_common_resources",
         ":service_version_type",
         "@score_baselibs//score/json",
-        "@score_baselibs//score/language/futurecpp",
     ],
 )
 
@@ -366,7 +365,6 @@ cc_library(
         ":someip_field_instance_deployment",
         ":someip_service_instance_id",
         "@score_baselibs//score/json",
-        "@score_baselibs//score/language/futurecpp",
         "@score_baselibs//score/result",
     ],
 )

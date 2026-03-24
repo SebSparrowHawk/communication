@@ -79,7 +79,6 @@ cc_library(
         "//score/mw/com/impl:__subpackages__",
     ],
     deps = [
-        "@score_baselibs//score/language/futurecpp",
         "@score_baselibs//score/result",
     ],
 )
@@ -110,7 +109,6 @@ cc_library(
     ],
     deps = [
         "//score/mw/com/impl/plumbing:sample_allocatee_ptr",
-        "@score_baselibs//score/language/futurecpp",
         "@score_baselibs//score/result",
     ],
 )
@@ -141,7 +139,6 @@ cc_library(
     ],
     deps = [
         "//score/mw/com/impl/plumbing:sample_allocatee_ptr",
-        "@score_baselibs//score/language/futurecpp",
         "@score_baselibs//score/result",
     ],
 )
