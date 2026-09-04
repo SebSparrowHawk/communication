@@ -254,8 +254,8 @@ class IvshmemTypedMemoryProvider : public score::memory::shared::TypedMemory
 
     mutable void* directory_map_{nullptr};    ///< cached mmap of the directory region
     mutable std::mutex directory_map_mutex_;  ///< guards the lazy mmap initialisation of directory_map_
-    std::unique_ptr<score::os::qnx::MmanQnx> mman_qnx_;
     std::uint64_t paddr_;        ///< Physical base address of the ivshmem BAR
+    std::unique_ptr<score::os::qnx::MmanQnx> mman_qnx_;
     std::uint64_t usable_size_;  ///< size - kDirectorySize (space for shm allocations)
 #endif
 

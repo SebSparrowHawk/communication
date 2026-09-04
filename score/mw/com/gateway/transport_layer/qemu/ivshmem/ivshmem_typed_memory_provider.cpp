@@ -101,10 +101,10 @@ DirectoryHeader* AsDirectoryHeader(void* dir) noexcept
     return static_cast<DirectoryHeader*>(dir);
 }
 
-const DirectoryHeader* AsDirectoryHeader(const void* dir) noexcept
-{
-    return static_cast<const DirectoryHeader*>(dir);
-}
+// const DirectoryHeader* AsDirectoryHeader(const void* dir) noexcept
+// {
+//     return static_cast<const DirectoryHeader*>(dir);
+// }
 
 IvshmemTypedMemoryProvider::DirectoryEntry* GetDirectoryEntries(DirectoryHeader* header) noexcept
 {

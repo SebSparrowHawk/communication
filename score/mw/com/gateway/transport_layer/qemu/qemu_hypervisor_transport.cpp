@@ -192,7 +192,7 @@ void QemuHypervisorTransport::HandleProvideServiceRequest(std::unique_ptr<Transp
         return;
     }
     PreCreateInterVmSharedMemory(specifier_result.value(), request.GetShmControlSize(), request.GetShmDataSize());
-    gateway_app_.ProvideService(specifier_result.value(), request.GetServiceElements());
+    std::ignore = gateway_app_.ProvideService(specifier_result.value(), request.GetServiceElements());
 }
 
 void QemuHypervisorTransport::HandleStopOfferServiceRequest(std::unique_ptr<TransportMessage> message)
@@ -228,7 +228,7 @@ void QemuHypervisorTransport::HandleOfferServiceRequest(std::unique_ptr<Transpor
         log::LogError("LoLa") << "QemuTransport: Invalid instance specifier in OfferServiceRequest!";
         return;
     }
-    gateway_app_.OfferService(specifier_result.value());
+    std::ignore = gateway_app_.OfferService(specifier_result.value());
 }
 
 void QemuHypervisorTransport::HandleUpdateNotification(std::unique_ptr<TransportMessage> message)
@@ -246,7 +246,7 @@ void QemuHypervisorTransport::HandleUpdateNotification(std::unique_ptr<Transport
         log::LogError("LoLa") << "QemuTransport: Invalid instance specifier in UpdateNotification!";
         return;
     }
-    gateway_app_.NotifyUpdate(specifier_result.value(), notification.GetElementType(), notification.GetElementName());
+    std::ignore = gateway_app_.NotifyUpdate(specifier_result.value(), notification.GetElementType(), notification.GetElementName());
 }
 
 void QemuHypervisorTransport::HandleRegisterNotificationRequest(std::unique_ptr<TransportMessage> message)
@@ -264,7 +264,7 @@ void QemuHypervisorTransport::HandleRegisterNotificationRequest(std::unique_ptr<
         log::LogError("LoLa") << "QemuTransport: Invalid instance specifier in RegisterNotificationRequest!";
         return;
     }
-    gateway_app_.RegisterUpdateNotification(
+    std::ignore = gateway_app_.RegisterUpdateNotification(
         specifier_result.value(), request.GetElementType(), request.GetElementName());
 }
 
@@ -283,7 +283,7 @@ void QemuHypervisorTransport::HandleUnregisterNotificationRequest(std::unique_pt
         log::LogError("LoLa") << "QemuTransport: Invalid instance specifier in UnregisterNotificationRequest!";
         return;
     }
-    gateway_app_.UnregisterUpdateNotification(
+    std::ignore = gateway_app_.UnregisterUpdateNotification(
         specifier_result.value(), request.GetElementType(), request.GetElementName());
 }
 
