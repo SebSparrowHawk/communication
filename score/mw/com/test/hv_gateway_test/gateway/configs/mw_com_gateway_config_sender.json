@@ -1,0 +1,16 @@
+{
+  "forwarded-services": [
+    "hypervisor/poc/TestEventServiceInstance"
+  ],
+  "expected-received-services": [],
+  "transport-layer": "QNX_HYPERVISOR",
+  "hypervisor-socket": {
+    "remote-ip": "169.254.136.101",
+    "local-port": 45001,
+    "remote-port": 45002,
+    "request-timeout-ms": 5000
+  },
+  "ivshmem": {
+    "preferred-bar-num": 2
+  }
+}
